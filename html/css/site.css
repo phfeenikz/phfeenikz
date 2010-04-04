@@ -1,0 +1,57 @@
+/* 
+    Document   : site
+    Created on : Apr 4, 2010, 9:19:22 PM
+    Author     : phfeenikz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+title {
+    text-align: center;
+
+}
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+div {
+    display: block;
+}
+
+#title {
+    background-color: #AAAAAA;
+    position: relative;
+    text-align: center;
+    width: 20%;
+    left: 40%;
+    font-size: 18pt;
+    padding: .5em;
+    border: .1em;
+    border-style: solid;
+}
+
+#content {
+    position: relative;
+    width: 40%;
+    left: 30%;
+    border: .1em solid;
+    padding: 1em;
+}
+
+#post {
+    background-color: #AAAAAA;
+    margin-left: 2em;
+    margin-right: 2em;
+    padding: .5em;
+    border: .1em solid;
+}
