@@ -55,3 +55,16 @@ div {
     padding: .5em;
     border: .1em solid;
 }
+
+#login {
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+}
+
+#horizontal {
+    display: block;
+    position: relative;
+    text-align: right;
+}

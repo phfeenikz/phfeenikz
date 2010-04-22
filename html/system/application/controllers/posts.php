@@ -17,8 +17,11 @@ class Posts extends Controller {
 
         $this->load->model('Posts_model');
         $data['posts'] = $this->Posts_model->get_recent_posts()->result_array();
+        $this->load->library('form_validation');
 
-        view_wrapper('posts_view', $data);
+        if ($this->form_validation->run('login') == FALSE) {
+            view_wrapper('posts_view', $data);
+        }
     }
 
     function comments() {
