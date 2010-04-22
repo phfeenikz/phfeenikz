@@ -18,10 +18,15 @@ class Posts extends Controller {
         $this->load->model('Posts_model');
         $data['posts'] = $this->Posts_model->get_recent_posts()->result_array();
         $this->load->library('form_validation');
+<<<<<<< HEAD:html/system/application/controllers/posts.php
 
         if ($this->form_validation->run('login') == FALSE) {
             view_wrapper('posts_view', $data);
         }
+=======
+        $this->form_validation->run('login');
+        view_wrapper('posts_view', $data);
+>>>>>>> Adding form validation stuffs.:html/system/application/controllers/posts.php
     }
 
     function comments() {
