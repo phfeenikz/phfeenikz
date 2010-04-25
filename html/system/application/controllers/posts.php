@@ -1,8 +1,5 @@
-<?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Posts extends Controller {
 
     function Posts() {
@@ -18,15 +15,25 @@ class Posts extends Controller {
         $this->load->model('Posts_model');
         $data['posts'] = $this->Posts_model->get_recent_posts()->result_array();
         $this->load->library('form_validation');
-<<<<<<< HEAD:html/system/application/controllers/posts.php
 
-        if ($this->form_validation->run('login') == FALSE) {
-            view_wrapper('posts_view', $data);
-        }
-=======
-        $this->form_validation->run('login');
+        $config =  array(
+            array(
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required|regex[username]',
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required|regex[password]',
+            )
+        );
+
+        $this->form_validation->set_rules($config);
+        $this->form_validation->run();
+        $data['validation_errors'] = validation_errors();
+
         view_wrapper('posts_view', $data);
->>>>>>> Adding form validation stuffs.:html/system/application/controllers/posts.php
     }
 
     function comments() {

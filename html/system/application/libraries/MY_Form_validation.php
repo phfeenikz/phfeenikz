@@ -1,8 +1,4 @@
-<?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class MY_Form_validation extends CI_Form_validation {
 
