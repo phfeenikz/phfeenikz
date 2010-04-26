@@ -9,29 +9,22 @@ class Posts extends Controller {
     }
 
     function index() {
-        $data['title'] = "Twittrnator";
-        $data['heading'] = "Recent Posts";
-
+        $data['title']             = "Twittrnator";
+        $data['heading']           = "Recent Posts";
+        $data['validation_errors'] = array();
         $this->load->model('Posts_model');
         $data['posts'] = $this->Posts_model->get_recent_posts()->result_array();
-        $this->load->library('form_validation');
 
-        $config =  array(
-            array(
-                'field' => 'username',
-                'label' => 'Username',
-                'rules' => 'required|regex[username]',
-            ),
-            array(
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required|regex[password]',
-            )
+        $config = array(
+            'username' => 'required|regex[password]',
+            'password' => 'required|regex[username]',
         );
 
-        $this->form_validation->set_rules($config);
-        $this->form_validation->run();
-        $data['validation_errors'] = validation_errors();
+        $this->load->library('form_validation');
+        $validation = $this->form_validation->validate($config, $errors);
+        if ( $errors == TRUE ){
+            $data['validation_errors'] = $errors;
+        }
 
         view_wrapper('posts_view', $data);
     }

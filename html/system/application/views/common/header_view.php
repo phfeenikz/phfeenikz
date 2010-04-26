@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="login">
-    <form title="login" method="post" action="posts">
+    <form title="login" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <span id="input_right">
             <label for="username">Username:</label>
             <input id="username" type="text" name="username" value="<?php echo set_value('username'); ?>" />
@@ -19,5 +19,8 @@
         <span id="input_right">
             <input type="submit" value="Go!" />
         </span>
+        <?php if ( array_key_exists('username', $validation_errors) || array_key_exists('password', $validation_errors) ){ ?>
+        <p><?php echo 'Invalid login, please try again'; ?>
+        <?php } ?>
     </form>
 </div>
