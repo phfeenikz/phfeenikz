@@ -32,25 +32,31 @@ class MY_Form_validation extends CI_Form_validation {
         $CI->form_validation->set_rules($config);
         $CI->form_validation->run();
 
-        $valid   = array();
-        $invalid = array();
-        $errors  = array();
+        $validator = new Validator();
 
         if ( validation_errors() ){
-            $errors = $CI->form_validation->_error_array;
-            foreach( $in_config as $name => $rules ) {
-                if ( array_key_exists( $name, $errors) ) {
-                    array_push( $invalid, $name );
-                }
-                else {
-                    array_push( $valid, $name );
-                }
+            $validator->errors = $CI->form_validation->_error_array;
+            $validator->has_errors = 1;
+        }
+ 
+        foreach( $in_config as $name => $rules ) {
+            $value = $CI->form_validation->_field_data[$name]['postdata'];
+            if ( count($validator->errors) && array_key_exists( $name, $validator->errors ) ) {
+                $validator->invalid[$name] = $value;
+            }
+            else {
+                $validator->valid[$name] = $value;
             }
         }
-        else {
-            return TRUE;
-        }
+        return $validator;
     }
+}
+
+class Validator {
+    var $has_errors = 0;
+    var $invalid    = array();
+    var $valid      = array();
+    var $errors     = array();
 }
 /* End of file MY_Form_validation.php */
 /* Location: ./application/libraries/MY_Form_validation.php */

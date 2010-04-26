@@ -20,7 +20,10 @@
             <input type="submit" value="Go!" />
         </span>
         <?php if ( array_key_exists('username', $validation_errors) || array_key_exists('password', $validation_errors) ){ ?>
-        <p><?php echo 'Invalid login, please try again'; ?>
+        <p><?php echo 'Invalid login, please try again'; ?></p>
+        <?php }
+        elseif ( $success ) { ?>
+        <p><?php echo $success; ?></p>
         <?php } ?>
     </form>
-</div>
+</div

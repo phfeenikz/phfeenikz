@@ -12,12 +12,11 @@ class Posts extends Controller {
         $data['title']             = "Twittrnator";
         $data['heading']           = "Recent Posts";
         $data['validation_errors'] = array();
+        $data['success']           = 0;
+
         $this->load->model('Posts_model');
         $data['posts'] = $this->Posts_model->get_recent_posts()->result_array();
-        $this->load->library('form_validation');
-<<<<<<< HEAD:html/system/application/controllers/posts.php
 
-<<<<<<< HEAD:html/system/application/controllers/posts.php
         $config = array(
             'username' => 'required|regex[password]',
             'password' => 'required|regex[username]',
@@ -29,19 +28,18 @@ class Posts extends Controller {
             $data['validation_errors'] = $errors;
         }
 
-=======
-        if ($this->form_validation->run('login') == FALSE) {
-            view_wrapper('posts_view', $data);
-        }
-=======
-        $this->form_validation->run('login');
->>>>>>> Adding form validation stuffs.:html/system/application/controllers/posts.php
-        view_wrapper('posts_view', $data);
->>>>>>> Adding form validation stuffs.:html/system/application/controllers/posts.php
-    }
+        $validator = $this->form_validation->validate($config);
 
-    function comments() {
-        echo 'Look at this!';
+        if ($validator->has_errors){
+            $data['validation_errors'] = $validator->errors;
+        }
+        else {
+            $valid = $validator->valid;
+            if ($valid['username'] && $valid['password']) {
+                $data['success'] = "Login successful!";
+            }
+        }
+        view_wrapper('posts_view', $data);
     }
 }
 
